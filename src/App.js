@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
+import Pagination from '@material-ui/lab/Pagination';
 
 import { List } from "./List"
 
@@ -17,14 +18,18 @@ function App() {
     { title: 'タイトル10', description: '説明テストテスト10' },
     { title: 'タイトル11', description: '説明テストテスト11' },
     { title: 'タイトル12', description: '説明テストテスト12' },
+    { title: 'タイトル13', description: '説明テストテスト13' },
   ]
 
-  const [itemList, setItemList] = useState(items)
+  const [page, setPage] = useState(1)
+  const [count, setCount] = useState(2) // FIXME: 初期値を設定する
 
-  const handlePaginate = (page) => {
-    // APIを叩きに行く処理
-    console.log('ページネーション処理')
-  };
+  const [itemList, setItemList] = useState(items.slice(0, 10))
+
+  const handlePaginate = (event, value) => {    
+    setItemList(items.slice((value - 1) * 10, value * 10))
+    setPage(value)
+  }
 
   return (
     <React.Fragment>
@@ -33,11 +38,11 @@ function App() {
       </h1>
       <List itemList={itemList}></List>
 
-      {/* <Pagination
-        sum={100}
-        per={10}
-        onChange={e => handlePaginate(e.page)}
-      /> */}
+      <Pagination
+        count={count}
+        page={page}
+        onChange={handlePaginate}
+      />
     </React.Fragment>
   );
 }
