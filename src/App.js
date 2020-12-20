@@ -1,8 +1,12 @@
 import React from 'react'
 import { useState } from 'react'
-import Pagination from '@material-ui/lab/Pagination';
+import Pagination from '@material-ui/lab/Pagination'
 
 import { List } from "./List"
+
+import firebase from "./firebase/index"
+
+console.log(firebase.firestore().collection('items').get())
 
 function App() {
   const items = [
