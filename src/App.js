@@ -16,7 +16,6 @@ function App() {
     setPage(value)
   }
 
-  // MEMO: useEffectとは
   React.useEffect(() => {
     fetchItemsAll().then((itemsData) => {
       setItemList(itemsData)
